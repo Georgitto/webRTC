@@ -6,6 +6,9 @@ const http = require("http");
 const https = require("https")
 const { v4: uuidv4 } = require('uuid');
 const app = express();
+
+app.use('/', express.static(__dirname + '/'));
+
 const port = process.env.PORT || 9000;
 let options = {
     // key: fs.readFileSync(__dirname + '/certs/privateKey.key'),
@@ -182,19 +185,3 @@ server.listen(port, () => {
     console.log(`Signalling Server running on port: ${port}`);
     console.log(users)
 });
-
-/*
-<html>
-<head>
-    <title>
-    </title>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <link rel="stylesheet" type="text/css" href="//index.from.sh/index.css" />
-    <script type="text/javascript" src="//index.from.sh/index.js"></script>
-</head>
-<body>
-</body>
-</html>
-
-
- */
