@@ -24,17 +24,7 @@ const sendTo = (connection, message) => {
     connection.send(JSON.stringify(message));
 };
 
-let genCert = function (id) {
-    openssl( 'openssl req -nodes -new -x509 -keyout ' + id + '.key -subj /C=RU/ST=Moscow/L=Moscow/O=MIREA/OU=DevOps/CN=p2pmes.ru/emailAddress=gshaporenko200@mail.ru -out ' + id + '.cert', function (err, buffer) {
-        console.log("Creating cert: " + buffer.toString(), err.toString());
-    });
 
-}
-let getPublicKey = function (id) {
-    openssl(`openssl x509 -pubkey -in ${id}.cert -out ${id + '-public'}.pem`, function (buffer, err) {
-        console.log("Get public key: " + buffer.toString(), err.toString())
-    })
-}
 
 const sendToAll = (clients, type, { id, name: userName }) => {
     Object.values(clients).forEach(client => {
@@ -76,7 +66,6 @@ wss.on("connection", ws => {
                     });
                 } else {
                     const id = uuidv4();
-                    genCert(id);
                     const loggedIn = Object.values(
                         users
                     ).map(({ id, name: userName }) => ({ id, userName }));
@@ -144,19 +133,18 @@ wss.on("connection", ws => {
                 }
                 break;
 
-            case 'get-crypto':
-                getPublicKey(users[name].id)
-                if (!!users[name]) sendTo(users[name], {type: 'get-crypto',
-                    key: fs.readFileSync(__dirname + `/openssl/${users[name].id}.key`),
-                    cert: fs.readFileSync(__dirname + `/openssl/${users[name].id}.cert`)}
-                    )
-                break;
+            // case 'get-crypto':
+            //     if (!!users[name]) sendTo(users[name], {type: 'get-crypto',
+            //         key: fs.readFileSync(__dirname + `/openssl/${users[name].id}.key`),
+            //         cert: fs.readFileSync(__dirname + `/openssl/${users[name].id}.cert`)}
+            //         )
+            //     break;
 
-            case 'get-public':
-                if (!!users[name]) sendTo(users[name], {type: 'get-public',
-                    publicKey: fs.readFileSync(__dirname + `/openssl/${users[name].id}-public.pem`)}
-                )
-                break;
+            // case 'get-public':
+            //     if (!!users[name]) sendTo(users[name], {type: 'get-public',
+            //         publicKey: fs.readFileSync(__dirname + `/openssl/${users[name].id}-public.pem`)}
+            //     )
+            //     break;
 
             default:
                 sendTo(ws, {
