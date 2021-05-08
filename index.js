@@ -8,6 +8,9 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 
 app.use('/', express.static(__dirname + '/'));
+app.get('/', (req, res) => {
+    res.sendFile('app.html', {root: __dirname})
+});
 
 const port = process.env.PORT || 9000;
 let options = {
@@ -138,12 +141,6 @@ wss.on("connection", ws => {
             //         key: fs.readFileSync(__dirname + `/openssl/${users[name].id}.key`),
             //         cert: fs.readFileSync(__dirname + `/openssl/${users[name].id}.cert`)}
             //         )
-            //     break;
-
-            // case 'get-public':
-            //     if (!!users[name]) sendTo(users[name], {type: 'get-public',
-            //         publicKey: fs.readFileSync(__dirname + `/openssl/${users[name].id}-public.pem`)}
-            //     )
             //     break;
 
             default:
