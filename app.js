@@ -6,11 +6,12 @@ const lc = new RTCPeerConnection();
 const dc = lc.createDataChannel('channel');
 const username = {name:'', emoji:'', content:''};
 let certID, verifyInfo;
-let createURL, getURL, accessKey;
+let createURL, getURL, accessKey, verifyURL;
 
 accessKey = 'access_key=08ddb67f2616a0d3f0734279dc1ea3a6';
 createURL = 'https://api.zerossl.com/certificates' + '?' + accessKey;
 getURL = 'https://api.zerossl.com/certificates/';
+verifyURL = 'https://api.zerossl.com/certificates';
 
 username.name = prompt('Enter your name:', 'Garry');
 const possibleEmojis = [
@@ -47,6 +48,10 @@ function getCert(id) {
         method: 'GET'
     }).then(response => response.json()).then(result => certInfo = result);
     return certInfo;
+}
+
+function verifyCert(id) {
+    
 }
 
 function checkCert(certInfo) {

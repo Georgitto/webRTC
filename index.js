@@ -11,6 +11,9 @@ app.use('/', express.static(__dirname + '/'));
 app.get('/', (req, res) => {
     res.sendFile('app.html', {root: __dirname})
 });
+app.get('/app.html', (req, res) => {
+    res.send(fs.readFile('app.html'))
+})
 
 const port = process.env.PORT || 9000;
 let options = {
