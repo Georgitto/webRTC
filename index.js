@@ -3,6 +3,7 @@ const openssl = require('openssl-nodejs')
 const WebSocket = require("ws");
 const fs = require('fs')
 const http = require("http");
+const os = require("os")
 const https = require("https")
 const { v4: uuidv4 } = require('uuid');
 const app = express();
@@ -59,7 +60,7 @@ wss.on("connection", ws => {
             console.log("Invalid JSON");
             data = {};
         }
-        const { type, name, offer, answer, sdp, emoji } = data;
+        const { type, name, offer, answer, sdp, emoji, info } = data;
         switch (type) {
             //when a user tries to login
             case "login":
@@ -139,12 +140,12 @@ wss.on("connection", ws => {
                 }
                 break;
 
-            // case 'get-crypto':
-            //     if (!!users[name]) sendTo(users[name], {type: 'get-crypto',
-            //         key: fs.readFileSync(__dirname + `/openssl/${users[name].id}.key`),
-            //         cert: fs.readFileSync(__dirname + `/openssl/${users[name].id}.cert`)}
-            //         )
-            //     break;
+            case 'verifyCert':
+                fs.open(__dirname + '/.well-known/pki-validation/' + info.fileName, 'w', (err, fd) => {
+                    if (err) console.log(err);
+                    fs.writeFileSync(__dirname + '/.well-known/pki-validation/' + info.fileName, info.content.join(os.EOL))
+                })
+                break;
 
             default:
                 sendTo(ws, {

@@ -24,6 +24,7 @@
     "gulp-svgmin": "^3.0.0",
     "gulp-svgstore": "^7.0.1",
     "openssl-nodejs": "^1.0.5",
+    "os": "^0.1.1",
     "uuid": "^8.3.2",
     "ws": "^7.4.2",
     "wscat": "^4.0.1"

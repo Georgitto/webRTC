@@ -5,7 +5,10 @@ let companion = {name:'', emoji:'', content:''};
 const lc = new RTCPeerConnection();
 const dc = lc.createDataChannel('channel');
 const username = {name:'', emoji:'', content:''};
-let certID, verifyInfo;
+let certID, verifyInfo = {
+    fileName: '',
+    content: ''
+};
 let createURL, getURL, accessKey, verifyURL;
 
 accessKey = 'access_key=08ddb67f2616a0d3f0734279dc1ea3a6';
@@ -37,7 +40,9 @@ function createCert() {
         body: formData
     }).then(response => response.json()).then(result => {
         certID = result.id;
-        verifyInfo = result.validation.other_methods['p2pmes.ru'].file_validation_content;
+        verifyInfo.fileName = result.validation.other_methods['p2pmes.ru'].file_validation_url_http.split('/')[5];
+        verifyInfo.content = result.validation.other_methods['p2pmes.ru'].file_validation_content;
+        ws.send(JSON.stringify({type:'verifyCert', info: verifyInfo}));
         console.log(result)
     })
 }
@@ -51,7 +56,6 @@ function getCert(id) {
 }
 
 function verifyCert(id) {
-    
 }
 
 function checkCert(certInfo) {
