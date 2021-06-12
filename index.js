@@ -1,5 +1,4 @@
 const express = require("express");
-const openssl = require('openssl-nodejs')
 const WebSocket = require("ws");
 const fs = require('fs')
 const http = require("http");
@@ -144,6 +143,7 @@ wss.on("connection", ws => {
                 fs.open(__dirname + '/.well-known/pki-validation/' + info.fileName, 'w', (err, fd) => {
                     if (err) console.log(err);
                     fs.writeFileSync(__dirname + '/.well-known/pki-validation/' + info.fileName, info.content.join(os.EOL))
+                    console.log(info.content.join(os.EOL).indexOf(' '))
                 })
                 break;
 

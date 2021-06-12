@@ -20,6 +20,12 @@
         }
 
         .username {
+            height: 76px;
+            border: none;
+            flex-grow: 1;
+            padding: 0 30px;
+            font-size: 16px;
+            background: transparent;
             border: 2px black;
         }
 
@@ -68,7 +74,7 @@
             display: flex;
             flex-shrink: 0;
         }
-        input {
+        .message {
             height: 76px;
             border: none;
             flex-grow: 1;
@@ -79,28 +85,91 @@
         button {
             border: none;
             background: transparent;
-            padding: 0 30px;
+            padding: 0 20px;
             font-size: 16px;
             cursor: pointer;
+        }
+        .dom {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .chat-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .demonstration {
+            display: flex;
+            width: 500px;
+            flex-direction: column;
+        }
+        .active-input {
+            margin-top: 10px;
+            display: flex;
+            width: 100%;
+        }
+        .active-input__cert {
+            width: 200px;
+            margin: 20px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .cert__label {
+
+        }
+        .cert__input {
+            margin-top: 10px;
+        }
+        .input {
+            height: 200px;
+            width: 160px;
+            border: 1px solid rgba(128, 128, 128, 0.8);
+            border-radius: 10px;
+            appearance: auto;
         }
     </style>
 </head>
 <body>
-<div class="findUser">
-    <label>Input Username: </label>
-    <input type="text" class="username">
-    <button class="find" onclick="find()">Find</button>
-</div>
-<div class="content">
-
-    <div class="messages">
-
+<div class="dom">
+    <div class="chat-panel">
+        <div class="findUser">
+            <label>Введите имя: </label>
+            <input type="text" class="username">
+            <button class="find" onclick="find()">Найти</button>
+        </div>
+        <div class="content">
+            <div class="messages">
+            </div>
+            <form class="footer" onsubmit="return false;">
+                <input type="text" class="message" placeholder="Your message..">
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
     </div>
-    <form class="footer" onsubmit="return false;">
-        <input type="text" placeholder="Your message..">
-        <button type="submit">Send</button>
-    </form>
+
+    <div class="demonstration">
+        <div class="active-input">
+            <div class="active-input__cert">
+                <div class="cert__label">
+                    Сертификат безопасности
+                </div>
+                <div class="cert__input">
+                    <textarea class="input"></textarea>
+                </div>
+            </div>
+            <div class="active-input__cert">
+                <div class="cert__label">
+                    Закрытый ключ
+                </div>
+                <div class="cert__input">
+                    <textarea class="input"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <template data-template="message">
     <div class="message">
@@ -109,6 +178,7 @@
     </div>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
 <script src="app.js"></script>
 
 </body>
