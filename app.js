@@ -153,6 +153,7 @@ function find() {
                         });
                     });
                 } else {
+                    alert('Сертификат пользователя не зверен центром сертификации.')
                     dc.close()
                 }
                 break;
@@ -176,6 +177,7 @@ function find() {
                 ).then((result) => {
                     console.log('Key was created!')
                     fullKey = result;
+                    alert('Соединение установлено!')
                 }).catch(err => console.log(err))
                 break;
         }
@@ -213,6 +215,7 @@ function find() {
                             });
                         });
                     } else {
+                        alert('Сертификат пользователя не зверен центром сертификации.')
                         dc.close()
                     }
                     break;
@@ -236,6 +239,7 @@ function find() {
                     ).then((result) => {
                         console.log('Key was created!')
                         fullKey = result;
+                        alert('Соединение установлено!')
                     }).catch(err => console.log(err))
                     break;
             }
@@ -367,6 +371,7 @@ ws.onopen = () => {
                                         });
                                     });
                                 } else {
+                                    alert('Сертификат пользователя не зверен центром сертификации.')
                                     dc.close()
                                 }
                                 break;
@@ -390,6 +395,7 @@ ws.onopen = () => {
                                 ).then((result) => {
                                     console.log('Key was created!')
                                     fullKey = result;
+                                    alert('Соединение установлено!')
                                 }).catch(err => console.log(err))
                                 break;
                         }
