@@ -10,7 +10,7 @@ let enc = new TextEncoder()
 let dec = new TextDecoder()
 let publicKey, privateKey, otherPublicKey, partial, otherPartial, fullKey, iv;
 
-username.name = prompt('Enter your name:', 'Garry');
+username.name = prompt('Введите имя:', 'Пётр');
 const possibleEmojis = [
     '🐀','🐁','🐭','🐹','🐂','🐃','🐄','🐮','🐅','🐆','🐯','🐇','🐐','🐑','🐏','🐴',
     '🐎','🐱','🐈','🐰','🐓','🐔','🐤','🐣','🐥','🐦','🐧','🐘','🐩','🐕','🐷','🐖',
